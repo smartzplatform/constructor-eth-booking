@@ -15,7 +15,7 @@ class Constructor(ConstructorInstance):
         json_schema = {
             "type": "object",
             "required": [
-                "address", "price", "cancellationFee", "rentDateStart", "rentDateEnd", "noCancelPeriod", "acceptObjectPeriod"
+                "address", "description", "price", "cancellationFee", "rentDateStart", "rentDateEnd", "noCancelPeriod", "acceptObjectPeriod"
             ],
             "additionalProperties": False,
 
@@ -51,7 +51,7 @@ class Constructor(ConstructorInstance):
                 "price": {
                     "title": "Price",
                     "description": "Price in ether for rent of object for whole rent period",
-                    "$ref": "#/definitions/ethCountPositive"
+                    "$ref": "#/definitions/uint256"
                 },
                 "fileUrl": {
                     "title": "Url of file with additional description",
@@ -80,7 +80,7 @@ class Constructor(ConstructorInstance):
                 "cancellationFee": {
                     "title": "Cancellation fee",
                     "description": "For canceling after \"no cancel\" time. In ether",
-                    "$ref": "#/definitions/ethCount"
+                    "$ref": "#/definitions/uint256"
                 },
 
             }
@@ -95,6 +95,12 @@ class Constructor(ConstructorInstance):
             },
             "rentDateEnd": {
                 "ui:widget": "unixTime"
+            },
+            "price": {
+                "ui:widget": "ethCount"
+            },
+            "cancellationFee": {
+                "ui:widget": "ethCount"
             }
         }
 
@@ -334,8 +340,8 @@ contract Booking is Ownable {
         m_description = '%_description%';
         m_fileUrl = '%_fileUrl%';
         m_fileHash = %_fileHash%;
-        m_price = %_price% ether;
-        m_cancellationFee = %_cancellationFee% ether;
+        m_price = %_price%;
+        m_cancellationFee = %_cancellationFee%;
         m_rentDateStart = %_rentDateStart%;
         m_rentDateEnd = %_rentDateEnd%;
         m_noCancelPeriod = %_noCancelPeriod%;
